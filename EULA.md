@@ -1,5 +1,5 @@
 # **Open Buckshot Roulette 最终用户许可协议 (EULA)**  
-**Copyright © 2023-2025 1503Dev. 保留所有权利。**  
+**Copyright © 2023-2025 CR. 保留所有权利。**  
 **此 EULA 自 2025 年 5 月 20 日起生效。**
 
 ---
