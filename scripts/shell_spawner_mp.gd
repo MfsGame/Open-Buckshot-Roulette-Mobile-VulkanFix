@@ -95,6 +95,7 @@ func SpawnShells(numberOfShells : int, numberOfLives : int, numberOfBlanks : int
 		pass
 	
 	sequenceArray.shuffle()
+	sequenceArray.shuffle()
 	
 	if !mp.is_server():
 		mp.on_response_get_shells.connect(func(shells):
@@ -103,14 +104,19 @@ func SpawnShells(numberOfShells : int, numberOfLives : int, numberOfBlanks : int
 		)
 		mp._rpc_get_shells()
 		await mp.on_response_get_shells
+	else:
+		mp.opponent_shells_ready = false
+		mp.permission_manager.SetInteractionPermissions(false)
 	
 	locationIndex = 0
 	#SPAWN SHELLS
-	for i in range(numberOfShells):
+	var seq:= sequenceArray.duplicate()
+	seq.shuffle()
+	for i in range(seq.size()):
 		spawnedShell = shellInstance.instantiate()
 		shellBranch = spawnedShell.get_child(0)
-		if sequenceArray.size() <= i: return
-		if (sequenceArray[i] == "live"): shellBranch.isLive = true
+		if seq.size() <= i: return
+		if (seq[i] == "live"): shellBranch.isLive = true
 		else: shellBranch.isLive = false
 		shellBranch.ApplyStatus()
 		spawnParent.add_child(spawnedShell)

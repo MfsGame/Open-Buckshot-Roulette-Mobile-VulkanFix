@@ -37,26 +37,26 @@ func _input(event: InputEvent) -> void:
 			#round_manager.currentRound = 2
 		pass
 	
-	if round_manager != null:
-		if Input.is_action_just_pressed('OpenBR_add_health'):
-			round_manager.health_player += 1
-			print('My health: ', round_manager.health_player)
-		if Input.is_action_just_pressed('OpenBR_subtract_health'):
-			round_manager.health_player -= 1
-			print('My health: ', round_manager.health_player)
-		if Input.is_action_just_pressed('OpenBR_add_dealer_health'):
-			round_manager.health_opponent += 1
-			print('Opponent health: ', round_manager.health_opponent)
-		if Input.is_action_just_pressed('OpenBR_substract_dealer_health'):
-			round_manager.health_opponent -= 1
-			print('Opponent health: ', round_manager.health_opponent)
-	
-	if Input.is_action_pressed('OpenBR_faster'):
-		Engine.time_scale = 4
-	elif Input.is_action_pressed('OpenBR_slower'):
-		Engine.time_scale = 0.4
-	else:
-		Engine.time_scale = 1
+	#if round_manager != null:
+		#if Input.is_action_just_pressed('OpenBR_add_health'):
+			#round_manager.health_player += 1
+			#print('My health: ', round_manager.health_player)
+		#if Input.is_action_just_pressed('OpenBR_subtract_health'):
+			#round_manager.health_player -= 1
+			#print('My health: ', round_manager.health_player)
+		#if Input.is_action_just_pressed('OpenBR_add_dealer_health'):
+			#round_manager.health_opponent += 1
+			#print('Opponent health: ', round_manager.health_opponent)
+		#if Input.is_action_just_pressed('OpenBR_substract_dealer_health'):
+			#round_manager.health_opponent -= 1
+			#print('Opponent health: ', round_manager.health_opponent)
+	#
+	#if Input.is_action_pressed('OpenBR_faster'):
+		#Engine.time_scale = 5
+	#elif Input.is_action_pressed('OpenBR_slower'):
+		#Engine.time_scale = 0.4
+	#else:
+		#Engine.time_scale = 1
 
 func is_android() -> bool:
 	#return true

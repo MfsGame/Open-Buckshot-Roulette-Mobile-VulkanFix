@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=4 uid="uid://durgqahjmtjxr"]
+[gd_scene load_steps=106 format=4 uid="uid://durgqahjmtjxr"]
 
 [ext_resource type="Script" uid="uid://71ykd25qgqom" path="res://scripts/HeavenManager.gd" id="1"]
 [ext_resource type="Script" uid="uid://c566n8nq5ihug" path="res://scripts/heaven.gd" id="1_01rup"]
@@ -23,10 +23,11 @@
 [ext_resource type="Material" uid="uid://cdrlcynkcj7w6" path="res://main player/test shader.tres" id="20"]
 [ext_resource type="Script" uid="uid://3ysm2lja2mfj" path="res://scripts/TextShaker.gd" id="21"]
 [ext_resource type="FontFile" uid="uid://vhj3kkn6yn8o" path="res://fonts/fake receipt.otf" id="22"]
-[ext_resource type="FontFile" uid="uid://057oayryyaua" path="res://fonts/OLDSSCH_.TTF" id="23"]
 [ext_resource type="Texture2D" uid="uid://b542a1s2p6h3h" path="res://misc/you are dead.png" id="24"]
+[ext_resource type="FontVariation" uid="uid://ctc3qjdnc687e" path="res://resources/font_variation_OLDSTYLE.tres" id="24_01rup"]
 [ext_resource type="Script" uid="uid://bcil5orxnqjlb" path="res://scripts/ButtonClass.gd" id="25"]
 [ext_resource type="Script" uid="uid://bxtpnf4ky70qe" path="res://scripts/JankPreventer.gd" id="26"]
+[ext_resource type="FontVariation" uid="uid://cb5nxwm0sb4pu" path="res://resources/font_variation_global.tres" id="26_8g5uk"]
 [ext_resource type="Script" uid="uid://dbjqitnvfe5u7" path="res://scripts/ButtonClass_Main.gd" id="27"]
 [ext_resource type="Script" uid="uid://elkk5k38u0yb" path="res://scripts/InteractionBranch.gd" id="28"]
 [ext_resource type="Texture2D" uid="uid://cbthxfddj8u5h" path="res://misc/bracket selection_square2.png" id="29"]
@@ -1871,7 +1872,7 @@ pivot_offset = Vector2(480, 0)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("23")
+theme_override_fonts/font = ExtResource("24_01rup")
 theme_override_font_sizes/font_size = 77
 text = "DEAD"
 horizontal_alignment = 1
@@ -1910,7 +1911,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(63.02, 0)
 theme_override_colors/font_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("22")
+theme_override_fonts/font = ExtResource("26_8g5uk")
 theme_override_font_sizes/font_size = 30
 text = "RETRY"
 horizontal_alignment = 1
@@ -1951,7 +1952,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(63.02, 0)
 theme_override_colors/font_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("22")
+theme_override_fonts/font = ExtResource("26_8g5uk")
 theme_override_font_sizes/font_size = 30
 text = "EXIT"
 horizontal_alignment = 1

@@ -244,7 +244,7 @@ func GrabShotgun():
 
 func put_down_shotgun():
 	print("Putting down shotgun")
-	if dealerHoldingShotgun:
+	if dealerHoldingShotgun or true:
 		animator_shotgun.play("enemy put down shotgun")
 		shellLoader.DealerHandsDropShotgun()
 		dealerHoldingShotgun = false
@@ -320,14 +320,63 @@ func pick_up_shotgun():
 		dealerHoldingShotgun = true
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed('debug_n4'): pick_up_shotgun()
-	if Input.is_action_just_pressed('debug_n6'): put_down_shotgun()
-	if Input.is_action_just_pressed('debug_n8'): Shoot('self')
-	if Input.is_action_just_pressed('debug_n2'): Shoot('player')
-	if Input.is_action_just_pressed('debug_n5'):
-		if itemManager.itemArray_dealer.size() >= 1:
-			use_item(itemManager.itemArray_dealer[0])
-	
-	if Input.is_action_just_pressed('debug_]'): print(roundManager.shellSpawner.sequenceArray)
-	if Input.is_action_just_pressed('debug_;'): roundManager.shellSpawner.sequenceArray = ['blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank']
-	if Input.is_action_just_pressed('debug_.'): roundManager.shellSpawner.sequenceArray = ['live']
+	#if Input.is_action_just_pressed('debug_n4'): pick_up_shotgun()
+	#if Input.is_action_just_pressed('debug_n6'): put_down_shotgun()
+	##if Input.is_action_just_pressed('debug_n8'): Shoot('self')
+	##if Input.is_action_just_pressed('debug_n2'): Shoot('player')
+	##if Input.is_action_just_pressed('debug_n5'):
+		##if itemManager.itemArray_dealer.size() >= 1:
+			##use_item(itemManager.itemArray_dealer[0])
+	##
+	#if Input.is_action_just_pressed('debug_]'): print(roundManager.shellSpawner.sequenceArray)
+	#if Input.is_action_just_pressed('debug_;'): roundManager.shellSpawner.sequenceArray = ['blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank', 'blank']
+	#if Input.is_action_just_pressed('debug_.'): roundManager.shellSpawner.sequenceArray = ['live']
+	pass
+
+func Shoot(who : String):
+	print('Shooting ', who)
+	var currentRoundInChamber = shellSpawner.sequenceArray[0]
+	dealerCanGoAgain = false
+	var playerDied = false
+	var dealerDied = false
+	ejectManager.FadeOutShell()
+	#ANIMATION DEPENDING ON WHO IS SHOT
+	match(who):
+		"self":
+			await get_tree().create_timer(.2, false).timeout
+			animator_shotgun.play("enemy shoot self")
+			await get_tree().create_timer(2, false).timeout
+			shotgunShooting.whoshot = "dealer"
+			shotgunShooting.PlayShootingSound()
+			pass
+		"player":
+			animator_shotgun.play("enemy shoot player")
+			await get_tree().create_timer(2, false).timeout
+			shotgunShooting.whoshot = "player"
+			shotgunShooting.PlayShootingSound()
+			pass
+	#SUBTRACT HEALTH. ASSIGN DEALER CAN GO AGAIN. RETURN IF DEAD
+	if (currentRoundInChamber == "live" && who == "self"): 
+		roundManager.health_opponent -= roundManager.currentShotgunDamage
+		if (roundManager.health_opponent < 0): roundManager.health_opponent = 0
+		smoke.SpawnSmoke("barrel")
+		cameraShaker.Shake()
+		dealerCanGoAgain = false
+		death.Kill("dealer", false, true)
+		return
+	if (currentRoundInChamber == "live" && who == "player"): 
+		roundManager.health_player -= roundManager.currentShotgunDamage
+		if (roundManager.health_player < 0): roundManager.health_player = 0
+		cameraShaker.Shake()
+		smoke.SpawnSmoke("barrel")
+		await(death.Kill("player", false, false))
+		playerDied = true
+		#put_down_shotgun()
+	if (currentRoundInChamber == "blank" && who == "self"): dealerCanGoAgain = true
+	#EJECTING SHELLS
+	await get_tree().create_timer(.4, false).timeout
+	if (who == "player"): animator_shotgun.play("enemy eject shell_from player")
+	if (who == "self"): animator_shotgun.play("enemy eject shell_from self")
+	await get_tree().create_timer(1.7, false).timeout
+	#shellSpawner.sequenceArray.remove_at(0)
+	EndDealerTurn(dealerCanGoAgain)

@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=3 format=3 uid="uid://ctc3qjdnc687e"]
+
+[ext_resource type="FontFile" uid="uid://057oayryyaua" path="res://fonts/OLDSSCH_.TTF" id="1_ya0ao"]
+[ext_resource type="FontFile" uid="uid://bfyqbkp2vc3si" path="res://fonts/unifont.otf" id="2_47fpt"]
+
+[resource]
+fallbacks = Array[Font]([ExtResource("2_47fpt")])
+base_font = ExtResource("1_ya0ao")

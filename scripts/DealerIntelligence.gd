@@ -387,10 +387,10 @@ func Shoot(who : String):
 		playerDied = true
 	if (currentRoundInChamber == "blank" && who == "self"): dealerCanGoAgain = true
 	#EJECTING SHELLS
-	await get_tree().create_timer(.4, false).timeout
+	await OpenBRGlobal.fetch_tree().create_timer(.4, false).timeout
 	if (who == "player"): animator_shotgun.play("enemy eject shell_from player")
 	if (who == "self"): animator_shotgun.play("enemy eject shell_from self")
-	await get_tree().create_timer(1.7, false).timeout
+	await OpenBRGlobal.fetch_tree().create_timer(1.7, false).timeout
 	#shellSpawner.sequenceArray.remove_at(0)
 	EndDealerTurn(dealerCanGoAgain)
 

@@ -49,8 +49,10 @@ func Kill(who : String, trueDeath : bool, returningShotgun : bool):
 					if (shotgunShooting.roundManager.health_player == 1): shitIsFuckedUp = true
 					if (shotgunShooting.roundManager.health_player != 0): shotgunShooting.FinalizeShooting(shotgunShooting.playerCanGoAgain, false, true, addingDelay)
 				DisableSpeakers()
-				if (shotgunShooting.roundManager.health_player == 0):
-					shotgunShooting.roundManager.OutOfHealth("player")
+				if shotgunShooting.roundManager.health_player == 0:
+					if mp == null: shotgunShooting.roundManager.OutOfHealth("player")
+					else:
+						shotgunShooting.roundManager.EndMainBatch()
 					return
 				await get_tree().create_timer(.4, false).timeout
 				speaker_playerDefib.play()
@@ -138,6 +140,7 @@ func MedicineDeath():
 
 @export var ach : Achievement
 func MainDeathRoutine():
+	if mp: return
 	var loadingHeaven = false
 	if (shotgunShooting.roundManager.endless):
 		if (rm.endscore != null):

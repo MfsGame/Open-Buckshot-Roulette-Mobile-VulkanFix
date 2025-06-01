@@ -19,6 +19,7 @@ class_name HealthCounter extends Node
 @export var dialogue : Dialogue
 @export var speaker_truedeath : AudioStreamPlayer2D
 @export var skullSymbols : Array[VisualInstance3D]
+@export var mp: MP
 
 var dialogueEntered_player = false
 var dialogueEntered_dealer = false
@@ -33,7 +34,8 @@ func SetupHealth():
 		if (setting):
 			ui_playername.text = roundManager.playerData.playername.to_upper()
 			var playername_upper = roundManager.playerData.playername.to_upper()
-			ui_playerwin.text = tr("PLAYERWIN") % [playername_upper] 
+			if mp: ui_playerwin.text = 'NEXT TURN' # tr("PLAYERWIN") % [mp.oppnent_signature.to_upper()]
+			else: ui_playerwin.text = tr("PLAYERWIN") % [playername_upper]
 			#ui_playerwin.text = roundManager.playerData.playername.to_upper() + " " + tr("PLAYERWIN")
 			setting = false
 		if !OpenBRGlobal.is_multiplayer and OpenBRGlobal.main.starting_health['enabled']:

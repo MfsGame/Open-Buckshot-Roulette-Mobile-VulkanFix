@@ -358,6 +358,7 @@ func ClearDeskUI(includingParent : bool):
 	pass
 
 func OutOfHealth(who : String):
+	if mp: mp.shell_spawner.sequenceArray = []
 	print('OutOfHealth: ', who)
 	if (who == "player"): 
 		death.MainDeathRoutine()

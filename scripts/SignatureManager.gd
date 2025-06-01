@@ -23,6 +23,7 @@ class_name Signature extends Node
 @export var btnParent_signature : Control
 @export var btn_signature_a : Control
 @export var controller : ControllerManager
+@export var mp: MP
 
 var fullstring = ""
 var lettercount = 0
@@ -139,6 +140,9 @@ func Input_Enter():
 		await tree.create_timer(.17, false).timeout
 		speaker_punch.pitch_scale = randf_range(.95, 1)
 		speaker_punch.play()
+	if mp:
+		mp.signature = fullstring
+		mp._rpc_send_signature()
 	roundManager.counting = true
 	await tree.create_timer(.17, false).timeout
 	parent_shotgun.transform.origin = origpos_shotgun

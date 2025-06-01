@@ -272,3 +272,9 @@ func init_round_editor():
 	label_true_item_count.text = str(int(round['number_of_items']))
 	label_true_blank_count.text = str(int(round['number_of_blank_shells']))
 	label_true_live_count.text = str(int(round['number_of_live_shells']))
+
+
+func _on_text_edit_new_gambling_name_gui_input(event: InputEvent) -> void:
+	if Input.is_action_pressed('backspace'):
+		text_edit_new_gambling_name.backspace()
+	pass # Replace with function body.

@@ -76,7 +76,7 @@ func _on_http_request_check_update_request_completed(result: int, response_code:
 	label_check_update.modulate.a = float(143) / 255
 	if response_code >= 200 and response_code < 300:
 		var json:Dictionary = JSON.parse_string(body.get_string_from_utf8())
-		if json.version_code > 9:
+		if json.version_code > 10:
 			label_new_version_version.text = json.version_name
 			update_url = json.url
 			control_new_version.show()

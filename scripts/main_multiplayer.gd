@@ -96,9 +96,6 @@ func init_invisible_nodes():
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.keycode == KEY_BACK and event.is_pressed():
 		print('Back')
-	if Input.is_action_pressed('OpenBR_test'):
-		permission_manager.SetInteractionPermissions(false)
-		round_manager.EndTurn(false)
 
 func refresh_collision_shape():
 	var vec:= get_window().size

@@ -27,6 +27,7 @@ class_name ShotgunShooting extends Node
 @export var speaker_splatter : AudioStreamPlayer2D
 @export var anim_splatter : AnimationPlayer
 @export var ach : Achievement
+@export var mp: MP
 
 var playerCanGoAgain
 
@@ -171,6 +172,7 @@ var delaying = false
 var isPlayerSide = false
 func FinalizeShooting(playerCanGoAgain : bool, placeShotgunOnTable : bool, waitForRevival : bool, addDelay : bool):
 	if(placeShotgunOnTable): animator_shotgun.play("player place on table after eject")
+	if mp: mp._rpc_put_down_shotgun()
 	shotgunshaker.StopShaking()
 	#shellSpawner.sequenceArray.remove_at(0)
 	await get_tree().create_timer(.6, false).timeout
